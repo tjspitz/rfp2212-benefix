@@ -3,14 +3,14 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
-// const router = require('./routes'); // TEMP TEMP TEMP
+const router = require('./routes');
 
 const app = express();
 const PORT = 3000;
 
 app.use(morgan('dev'));
 app.use(cors());
-// app.use('/plans', router); // TEMP TEMP TEMP
+app.use('/plans', router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
