@@ -21,6 +21,7 @@ module.exports = {
     camelcase: 'off',
     'react/prop-types': 'off',
     'import/extensions': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'react/jsx-filename-extension': 'off',
     'react/jsx-one-expression-per-line': 'off',
   },
