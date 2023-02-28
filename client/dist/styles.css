@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+
+}
+
+h1 {
+  border: 0.5rem solid #800080;
+  text-align: center;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.welcome, .plans, .scenarios {
+  border: 0.5rem solid #006400;
+  margin: 1rem;
+  padding: 2rem;
+}
+
+.plan-info {
+  border: 0.25rem solid #8b0000;
+  margin: 0.5rem;
+  padding: 1rem;
+}
