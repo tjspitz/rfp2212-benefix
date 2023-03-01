@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import AddScenario from './AddScenario.jsx';
 
 const OnePlan = ({
-  key, planName, planType, coverageType,
-  deductible, oop, coinsurance,
-  premium, premFreq, pcCoinsurance,
+  planId, planName, planType, coverageType,
+  deductible, oop, coinsurance, premium,
+  premFreq, pcCoinsurance, updatePlan,
 }) => {
   const [visible, setVisible] = useState(false);
 
@@ -52,9 +52,10 @@ const OnePlan = ({
         Add New Scenario
       </button>
       <AddScenario
-        id={key}
+        id={planId}
         visible={visible}
         setVisible={setVisible}
+        updatePlan={updatePlan}
       />
     </div>
   );

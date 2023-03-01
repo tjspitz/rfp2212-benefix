@@ -8,6 +8,7 @@ import FinalInfo from './planInfo/FinalInfo.jsx';
 
 const App = () => {
   const [allPlans, setAllPlans] = useState([]);
+  // const [allScenarios, setAllScenarios] = useState([]);
   const [infoProgress, setInfoProgress] = useState(0);
   const [basicPlanData, setBasicPlanData] = useState({});
   const [expandedPlanData, setExpandedPlanData] = useState({});
@@ -38,9 +39,9 @@ const App = () => {
     setSubmitted(!submitted);
   };
 
-  const updatePlan = (planId, scenario) => {
+  const updatePlan = (scenario) => {
     axios.put('/plans', { ...scenario })
-      .then(() => console.log('updated plan id ' + planId))
+      .then(() => console.log('updated plan: ', scenario.id))
       .catch((err) => err);
     setSubmitted(!submitted);
   };
@@ -75,7 +76,7 @@ const App = () => {
           />
         )}
       </div>
-      <Plans allPlans={allPlans} />
+      <Plans allPlans={allPlans} updatePlan={updatePlan} />
       <Scenarios />
     </div>
   );

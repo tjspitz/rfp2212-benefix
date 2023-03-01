@@ -11,13 +11,28 @@ const AddScenario = ({
   const [hospStays, setHospStays] = useState(0);
   const [surgeries, setSurgeries] = useState(0);
   const [pregnancy, setPregnancy] = useState(0);
+  const [pregYes, setPregYes] = useState('No');
+
+  const handleResetClick = (e) => {
+    e.preventDefault();
+    setPcVisits(0);
+    setScVisits(0);
+    setMentVisits(0);
+    setUcVisits(0);
+    setErVisits(0);
+    setHospStays(0);
+    setSurgeries(0);
+    setPregnancy(0);
+    setPregYes('No');
+    setVisible(!visible);
+  };
 
   const handleFinishedClick = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const formData = Object.fromEntries(form.entries());
-
-    updatePlan(id, formData);
+    formData.id = id;
+    updatePlan(formData);
   };
 
   const handlePcSliderChange = (e) => {
@@ -49,6 +64,11 @@ const AddScenario = ({
   };
 
   const handlePregSliderChange = (e) => {
+    if (pregYes === 'No') {
+      setPregYes('Yes');
+    } else {
+      setPregYes('No');
+    }
     setPregnancy(e.target.value);
   };
 
@@ -68,6 +88,7 @@ const AddScenario = ({
               onChange={handlePcSliderChange}
             />
           </label>
+          <hr />
           <label htmlFor="scVisits">
             Specialist Care Visits per Year: {scVisits}
             <input
@@ -80,6 +101,7 @@ const AddScenario = ({
               onChange={handleScSliderChange}
             />
           </label>
+          <hr />
           <label htmlFor="mentVisits">
             Mental Health Visits per Year: {mentVisits}
             <input
@@ -104,6 +126,7 @@ const AddScenario = ({
               onChange={handleUcSliderChange}
             />
           </label>
+          <hr />
           <label htmlFor="erVisits">
             ER Visits per Year: {erVisits}
             <input
@@ -116,6 +139,7 @@ const AddScenario = ({
               onChange={handleErSliderChange}
             />
           </label>
+          <hr />
           <label htmlFor="hospStays">
             Hospital Stays &#40;in days&#41; per Year: {hospStays}
             <input
@@ -128,6 +152,7 @@ const AddScenario = ({
               onChange={handleHospSliderChange}
             />
           </label>
+          <hr />
           <label htmlFor="surgeries">
             Surgeries per Year: {surgeries}
             <input
@@ -140,8 +165,9 @@ const AddScenario = ({
               onChange={handleSurgSliderChange}
             />
           </label>
+          <hr />
           <label htmlFor="pregnancy">
-            Do you plan on being pregnant this year?
+            Will you give birth this year? {pregYes}
             <input
               type="range"
               name="pregnancy"
@@ -151,11 +177,12 @@ const AddScenario = ({
               value={pregnancy}
               onChange={handlePregSliderChange}
             />
-            {!pregnancy && <p>No</p>}
-            {pregnancy && <p>Yes</p>}
           </label>
-          <button type="reset">Reset</button>
-          <button type="submit">Submit this plan</button>
+          <hr />
+          <button type="button" onClick={handleResetClick}>
+            Reset &amp; Close
+          </button>
+          <button type="submit">Submit this Scenario</button>
         </form>
       )}
     </div>
