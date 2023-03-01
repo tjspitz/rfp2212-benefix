@@ -10,10 +10,10 @@ const PORT = 3000;
 
 app.use(morgan('dev'));
 app.use(cors());
-app.use('/plans', router);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use('/', router);
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.listen(PORT, () => console.log(`Server Listening at http://localhost:${PORT}`));
