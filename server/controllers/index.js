@@ -7,13 +7,19 @@ module.exports = {
       .catch((err) => res.status(500).send(err));
   },
   post: (req, res) => {
-    console.log('posting: ', req.body);
     Plan.create(req.body)
       .then(() => res.sendStatus(201))
       .catch((err) => res.status(500).send(err));
   },
   put: (req, res) => {
-    Plan.findOneAndUpdate()
+    console.log('updating via: ', req.body.id);
+    const filter = { _id: req.body.id };
+    delete req.body.id;
+
+    const update = { $push: { scenarios: req.body } };
+    const options = { new: true };
+
+    Plan.findOneAndUpdate(filter, update, options)
       .then(() => res.sendStatus(204))
       .catch((err) => res.status(500).send(err));
   },

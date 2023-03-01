@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/plans', {
   useNewUrlParser: true, useUnifiedTopology: true,
 });
