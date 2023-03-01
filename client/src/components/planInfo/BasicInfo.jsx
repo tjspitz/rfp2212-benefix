@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import React, { useState } from 'react';
 
 const BasicInfo = ({
@@ -43,8 +42,8 @@ const BasicInfo = ({
           Coverage:
           <select name="coverageType" defaultValue="na" required>
             <option disabled value="na">Choose an option</option>
-            <option value="">Single</option>
-            <option value="1">Family</option>
+            <option value="single">Single</option>
+            <option value="family">Family</option>
           </select>
         </label>
         <hr />
@@ -92,9 +91,9 @@ const BasicInfo = ({
           />
         </label>
         <hr />
-        <label htmlFor="premiumFreq">
+        <label htmlFor="premFreq">
           Premium frequency:
-          <select name="premiumFreq" defaultValue="na" required>
+          <select name="premFreq" defaultValue="na" required>
             <option disabled value="na">Choose an option</option>
             <option value="52">Weekly</option>
             <option value="26">Bi-weekly</option>
@@ -110,3 +109,5 @@ const BasicInfo = ({
   );
 };
 export default BasicInfo;
+
+

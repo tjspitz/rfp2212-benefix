@@ -1,8 +1,7 @@
-/* eslint-disable react/function-component-definition */
 import React, { useState } from 'react';
 
 const FinalInfo = ({
-  finalPlanData, setFinalPlanData, setInfoProgress, sendAllData,
+  finalPlanData, setFinalPlanData, sendAllData,
 }) => {
   const [facilSlider, setFacilSlider] = useState(20);
   const [surgSlider, setSurgSlider] = useState(20);

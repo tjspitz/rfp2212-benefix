@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Plans from './Plans.jsx';
@@ -17,6 +16,12 @@ const App = () => {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
+    axios.get('/plans')
+      .then((response) => {
+        setAllPlans(response.data);
+      })
+      .catch((err) => err);
+
     setInfoProgress(0);
     setBasicPlanData({});
     setExpandedPlanData({});
@@ -25,12 +30,18 @@ const App = () => {
 
   const sendAllData = () => {
     const allData = Object.assign(basicPlanData, expandedPlanData, finalPlanData);
-    console.log('allData: ', allData);
 
-    axios.post('/plans')
+    axios.post('/plans', { ...allData })
       .then(() => console.log('added plan!'))
       .catch((err) => err);
 
+    setSubmitted(!submitted);
+  };
+
+  const updatePlan = (planId, scenario) => {
+    axios.put('/plans', { ...scenario })
+      .then(() => console.log('updated plan id ' + planId))
+      .catch((err) => err);
     setSubmitted(!submitted);
   };
 
@@ -64,7 +75,7 @@ const App = () => {
           />
         )}
       </div>
-      <Plans />
+      <Plans allPlans={allPlans} />
       <Scenarios />
     </div>
   );
