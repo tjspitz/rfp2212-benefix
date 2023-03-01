@@ -5,10 +5,23 @@
 }
 
 h1 {
+  font-size: 2rem;
   border: 0.5rem solid #800080;
   text-align: center;
   margin: 1rem;
   padding: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  font-size: 1.1rem;
 }
 
 .welcome, .plans, .scenarios {

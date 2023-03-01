@@ -13,8 +13,7 @@ const AddScenario = ({
   const [pregnancy, setPregnancy] = useState(0);
   const [pregYes, setPregYes] = useState('No');
 
-  const handleResetClick = (e) => {
-    e.preventDefault();
+  const resetAndClose = () => {
     setPcVisits(0);
     setScVisits(0);
     setMentVisits(0);
@@ -27,12 +26,18 @@ const AddScenario = ({
     setVisible(!visible);
   };
 
+  const handleResetClick = (e) => {
+    e.preventDefault();
+    resetAndClose();
+  };
+
   const handleFinishedClick = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const formData = Object.fromEntries(form.entries());
     formData.id = id;
     updatePlan(formData);
+    resetAndClose();
   };
 
   const handlePcSliderChange = (e) => {
