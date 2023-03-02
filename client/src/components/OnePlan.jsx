@@ -36,7 +36,7 @@ const OnePlan = ({
           <tr>
             <td>Deductible: &#36;{deductible}</td>
             <td>OOP: &#36;{oop}</td>
-            <td>Coinsurance: &#36;{coinsurance}</td>
+            <td>Coinsurance: {coinsurance}&#37;</td>
           </tr>
           <tr>
             <td className="whole-row" colSpan="3">
