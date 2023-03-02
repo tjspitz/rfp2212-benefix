@@ -6,14 +6,71 @@ const OneScenario = ({
   scenario, costData, planStats,
 }) => {
   const [visitCostPairs, setVisitCostPairs] = useState({});
-  // const [scenarioStats, setScenarioStats] = useState({});
-  // const [costDataStats, setCostDataStats] = useState({});
+  const [costReport, setCostReport] = useState([]);
 
   useEffect(() => {
-    // setScenarioStats({ ...scenario });
-    // setCostDataStats({ ...costData });
     setVisitCostPairs(pairSetter());
   }, []);
+
+  const sumCosts = (pairs) => {
+    const {
+      deductible,
+      oop,
+      coinsurance,
+      premium,
+      premFreq,
+    } = planStats;
+
+    let total = 0;
+    let excess = 0;
+    let plusPrem = premium * premFreq;
+    let dedMet = false;
+    let oopMet = false;
+    const coinsPercent = coinsurance / 100;
+    let dedLimit;
+    let oopLimit;
+    let dedRemainder;
+    let oopRemainder;
+
+    for (const event in pairs) {
+      let multiplier = pairs[event][0];
+      const visitCost = pairs[event][1];
+      const visitCoinsCost = visitCost * coinsPercent;
+
+      while (multiplier > 0) {
+        dedLimit = deductible - total;
+        oopLimit = oop - total;
+        dedRemainder = visitCost - dedLimit;
+        oopRemainder = visitCost - oopLimit;
+
+        if (oopMet) {
+          excess += visitCost;
+        } else {
+          if (!dedMet) {
+            if (total + visitCost > deductible) {
+              dedMet = true;
+              total += dedLimit;
+              total += dedRemainder * coinsPercent;
+            } else {
+              total += visitCost;
+            }
+          } else {
+            if (total + visitCoinsCost > oop) {
+              oopMet = true;
+              total += oopLimit;
+              excess += oopRemainder;
+            } else {
+              total += visitCoinsCost;
+            }
+          }
+        }
+        multiplier -= 1;
+      }
+    }
+    plusPrem += total;
+    return [total, plusPrem, excess];
+    // setCostReport(costReport.concat([total, plusPrem, excess]));
+  };
 
   const pairSetter = () => {
     const {
@@ -61,6 +118,8 @@ const OneScenario = ({
         delete costPairs[event];
       }
     }
+    // TECH DEBT OMG SIDE EFFECTS
+    setCostReport(sumCosts(costPairs));
     return costPairs;
   };
 
@@ -88,50 +147,53 @@ const OneScenario = ({
         sentence = `${sentence.slice(0, sentence.length - 2)}.`;
       }
     }
-
     return sentence;
   };
 
-  // algorithm for multiplying costDatas against planStats
-  // deductible is 2000
-  // oop is 5000
-  // coins is 20%
-  // premium is 200, premFreq is 26
-
-  // const sumCosts = () => {
-
-  //   const {
-  //     deductible,
-  //     oop,
-  //     coinsurance,
-  //     premium,
-  //     premFreq,
-  //     pcCoinsurance,
-  //   } = planStats;
-
-  //   let sumPc, sumSc, sumMent, sumUc, sumEr, sumHosp, sumSurg, sumPreg;
-
-  // add premium * premFreq to total
-  // };
   return (
     <div className="one-scenario container">
       <div className="scenario-review">
         {generateOverview()}
       </div>
-      <table>
-        <tbody>
-          <tr className="table-header">
-            <th>Deductible: {`Over / Under`}</th>
-            <th>OOP Max: {`Reached / Under`}</th>
-            <th>Annual Premium: {`$amount`}</th>
-          </tr>
-          <tr>
-            <td className="whole-row centered" colSpan="3">
-              &#8213; Contributing Costs &#8213;
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <ul className="scenario-breakdown">
+        <li>
+          You&#160;{
+            costReport[0] >= planStats.deductible
+              ? 'reached'
+              : 'didn\'t reach'
+          }&#160;your deductible of &#36;{planStats.deductible}
+        </li>
+        <li>
+          You&#160;{
+            costReport[0] >= planStats.oop
+              ? 'reached'
+              : 'didn\'t reach'
+          }&#160;
+          your out-of-pocket maxiumum of &#36;{planStats.oop}.
+        </li>
+        <li>
+          The cost of your premium for one full year is &#36;
+          {(planStats.premium * planStats.premFreq).toFixed(2)}.
+        </li>
+        <li>
+          Based upon this scenario, you would pay
+          &#36;{costReport[0]}
+          &#160;in medical bills under this plan in one year.
+        </li>
+        <li>
+          Accounting for your medical bills and your premiums,
+          you would pay
+          &#36;{costReport[1]}
+          &#160;this year.
+        </li>
+        {costReport[2] ? (
+          <li>
+            However, this plan potentially saved you
+            &#36;{costReport[2]}
+            due to the conditions of this scenario.
+          </li>
+        ) : null}
+      </ul>
     </div>
   );
 };

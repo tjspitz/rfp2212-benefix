@@ -43,6 +43,12 @@ body {
   line-height: 1.5;
 }
 
+.scenario-breakdown {
+  width: 75%;
+  margin: 5%;
+  line-height: 1.75rem;
+}
+
 .welcome,
 .plans {
   padding: 2rem;
