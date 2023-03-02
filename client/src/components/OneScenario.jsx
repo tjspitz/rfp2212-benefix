@@ -42,35 +42,51 @@ const OneScenario = ({
     } = scenario;
 
     const costPairs = {
-      'had Primary Care': [pcVisits, pcVisitCost], // had
-      'had Specialist Care': [scVisits, scVisitCost], // had
-      'saw a Therapist': [mentVisits, mentVisitCost], // had
-      'went to Urgent Care': [ucVisits, ucVisitCost], // went to
-      'went to the ER': [erVisits, erVisitCost], // went to
-      'went to the Hospital': [hospStays, hospStayCost], // went to
-      'had Surgery': [surgeries, surgeryCost], // had
+      'had Primary Care': [pcVisits, pcVisitCost],
+      'had Specialist Care': [scVisits, scVisitCost],
+      'saw a Therapist': [mentVisits, mentVisitCost],
+      'went to Urgent Care': [ucVisits, ucVisitCost],
+      'went to the ER': [erVisits, erVisitCost],
+      'went to the Hospital': [hospStays, hospStayCost],
+      'had Surgery': [surgeries, surgeryCost],
       'Delivered a Child': [pregnancy, pregnancyCost],
       // diagCost,
       // specImgCost,
       // physFeeCost,
     };
+
+    for (const event in costPairs) {
+      const visitNum = costPairs[event][0];
+      if (!visitNum) {
+        delete costPairs[event];
+      }
+    }
     return costPairs;
   };
 
   const generateOverview = () => {
-    let counter = 1;
+    const max = Object.keys(visitCostPairs).length;
+    let counter = 0;
     let sentence = 'In this scenario, you ';
+    let fragment;
+
     for (const event in visitCostPairs) {
       const visitNum = visitCostPairs[event][0];
-      if (visitNum > 2) {
-        sentence += `${event} ${visitNum} times, `;
+      counter += 1;
+
+      if (visitNum > 1) {
+        fragment = `${event} ${visitNum} times, `;
+        sentence += fragment;
       } else if (visitNum) {
-        sentence += `${event} once, `;
+        fragment = `${event} once, `;
+        sentence += fragment;
       }
-      if (counter === 8) {
+      if (counter === max) {
+        if (counter > 1) {
+          sentence = `${sentence.slice(0, -(fragment.length))} and ${fragment}`;
+        }
         sentence = `${sentence.slice(0, sentence.length - 2)}.`;
       }
-      counter += 1;
     }
 
     return sentence;
@@ -100,10 +116,22 @@ const OneScenario = ({
   return (
     <div className="one-scenario container">
       <div className="scenario-review">
-        <p>
-          {generateOverview()}
-        </p>
+        {generateOverview()}
       </div>
+      <table>
+        <tbody>
+          <tr className="table-header">
+            <th>Deductible: {`Over / Under`}</th>
+            <th>OOP Max: {`Reached / Under`}</th>
+            <th>Annual Premium: {`$amount`}</th>
+          </tr>
+          <tr>
+            <td className="whole-row centered" colSpan="3">
+              &#8213; Contributing Costs &#8213;
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

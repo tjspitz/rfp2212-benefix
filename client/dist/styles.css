@@ -15,7 +15,7 @@ body {
   width: 66%;
   margin: auto;
   border-bottom: 0.5rem solid #A57878;
-  border-image: linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66)) 1;
+  border-image: linear-gradient(45deg, #D6C2C2, #312121) 1;
 }
 
 .title {
@@ -37,6 +37,12 @@ body {
   margin-bottom: 1rem;
 }
 
+.scenario-review {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
 .welcome,
 .plans {
   padding: 2rem;
@@ -49,6 +55,7 @@ body {
   margin: 0.5rem;
   padding: 1rem;
 }
+
 /* ========== INPUTS ========== */
 input, select {
   padding: 0.3rem;
@@ -123,6 +130,16 @@ td {
   text-align: left;
   font-size: 1.2rem;
   padding: 0.75rem 0;
+}
+
+.whole-row.centered {
+  text-align: center;
+}
+
+/* ========== SWIPER ========== */
+.swiper {
+  margin: 0.5rem;
+  padding: 1rem;
 }
 
 .swiper-v {

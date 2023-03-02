@@ -119,6 +119,7 @@ const AddScenario = ({
               onChange={handleMentSliderChange}
             />
           </label>
+          <hr />
           <label htmlFor="ucVisits">
             Urgent Care Visits per Year: {ucVisits}
             <input

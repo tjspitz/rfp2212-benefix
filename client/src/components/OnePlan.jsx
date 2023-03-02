@@ -74,7 +74,6 @@ const OnePlan = ({
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* </SwiperSlide> */}
       <button
         className="add-scenario btn"
         type="button"
