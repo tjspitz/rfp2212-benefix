@@ -20,7 +20,7 @@ const BasicInfo = ({
 
   return (
     <div className="plan-info">
-      <h4>Basic Plan Information</h4>
+      <div className="subtitle">Basic Plan Information</div>
       <form onSubmit={handleContinueClick}>
         <label htmlFor="planName">
           Plan Name &#40;e.g. &#34;Constant Care Silver 7 150&#34;&#41;:

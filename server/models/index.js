@@ -28,7 +28,7 @@ const plansSchema = mongoose.Schema({
     scVisits: Number,
     mentVisits: Number,
     ucVisits: Number,
-    erVists: Number,
+    erVisits: Number,
     hospStays: Number,
     surgeries: Number,
     pregnancy: Boolean,

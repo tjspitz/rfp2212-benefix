@@ -48,8 +48,9 @@ const App = () => {
 
   return (
     <div>
+      <div className="title">BenefiX</div>
       <div className="welcome">
-        <h3>Add a new plan</h3>
+        <div className="section-title">Add a new plan</div>
         {!infoProgress && (
           <BasicInfo
             basicPlanData={basicPlanData}
@@ -77,7 +78,6 @@ const App = () => {
         )}
       </div>
       <Plans allPlans={allPlans} updatePlan={updatePlan} />
-      <Scenarios />
     </div>
   );
 };

@@ -45,7 +45,7 @@ const FinalInfo = ({
 
   return (
     <div className="plan-info">
-      <h4>Finalize Plan Information</h4>
+      <div className="subtitle">Finalize Plan Information</div>
       <form onSubmit={handleFinishedClick}>
         <label htmlFor="facilHospCoinsurance">
           Facility Fee <em>&#40;hospitalization&#41;</em> Coinsurance:

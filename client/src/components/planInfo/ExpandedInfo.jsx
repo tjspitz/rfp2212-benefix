@@ -45,7 +45,7 @@ const ExpandedInfo = ({
 
   return (
     <div className="plan-info">
-      <h4>Additional Plan Information</h4>
+      <div className="subtitle">Additional Plan Information</div>
       <form onSubmit={handleContinueClick}>
         <label htmlFor="pcCoinsurance">
           Primary Care Coinsurance:
