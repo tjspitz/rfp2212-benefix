@@ -12,7 +12,7 @@ body {
 .title,
 .welcome,
 .plans {
-  width: 66%;
+  width: 100%;
   margin: auto;
   border-bottom: 0.5rem solid #A57878;
   border-image: linear-gradient(45deg, #D6C2C2, #312121) 1;
@@ -28,6 +28,7 @@ body {
 .section-title {
   font-size: 2rem;
   font-weight: 500;
+  text-align: center;
 }
 
 .subtitle {
@@ -52,6 +53,7 @@ body {
 .welcome,
 .plans {
   padding: 2rem;
+  max-width: 66%;
 }
 
 .plan-info,
@@ -150,4 +152,24 @@ td {
 
 .swiper-v {
   height: 20rem;
+  align-self: center;
+}
+
+@media only screen and (max-width: 1300px) {
+  tbody,
+  .title,
+  .welcome,
+  .plans,
+  .swiper-v {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 900) {
+  .section-title {
+    text-align: left;
+  }
 }
