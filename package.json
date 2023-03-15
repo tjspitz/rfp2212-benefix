@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tjspitz/mvp.git"
+    "url": "git+https://github.com/tjspitz/rfp2212-benefix.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tjspitz/mvp/issues"
+    "url": "https://github.com/tjspitz/rfp2212-benefix/issues"
   },
-  "homepage": "https://github.com/tjspitz/mvp#readme",
+  "homepage": "https://github.com/tjspitz/rfp2212-benefix#readme",
   "description": "",
   "devDependencies": {
     "@babel/cli": "^7.21.0",
